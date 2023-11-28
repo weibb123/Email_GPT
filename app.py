@@ -75,10 +75,12 @@ submit_button = st.button(label="Draft")
 
 if submit_button:
     with st.spinner("Working hard.."):
-        response, cost = draft_email(email, username, more_info)
-        
-        st.text_area("Your draft email", response, height=600)
-        st.write(f"Total Cost (USD): ${cost}")
+        try:
+            response, cost = draft_email(email, username, more_info)
+            st.text_area("Your draft email", response, height=600)
+            st.write(f"Total Cost (USD): ${cost}")
+        except Exception as e:
+            st.write("Did you enter your own gpt api key?")
 
 
 
